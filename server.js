@@ -101,9 +101,11 @@ app.all('/.well-known/jwks.json', (req, res, next) => {
 });
 
 app.get('/.well-known/jwks.json', (req, res) => {
-  const validKeys = [keyPair].filter(key => !key.expired);
+  const validKeys = [keyPair].filter(key => key.exp > Math.floor(Date.now() / 1000));
+  const jsonKeys = validKeys.map(key => key.toJSON());
+  
   res.setHeader('Content-Type', 'application/json');
-  res.json({ keys: validKeys.map(key => key.toJSON()) });
+  res.json({ keys: jsonKeys });
 });
 
 app.post('/auth', (req, res) => {
@@ -117,7 +119,10 @@ app.post('/auth', (req, res) => {
 generateKeyPairs().then(() => {
   generateToken()
   generateExpiredJWT()
+  db.close()
   app.listen(port, () => {
     console.log(`Server started on http://localhost:${port}`);
   });
 });
+
+module.exports = app;
