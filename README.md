@@ -12,7 +12,7 @@ Testing the App
 To run the tests, execute the following command:
 `npm test`
 This command will run the test suite using Jest. The tests ensure that endpoints return the expected responses and that the application functions correctly. 
-#### Note: Don't run the test while server is still because the port 8080 will be occupied.
+#### Note: Don't run the test while server is still active because the port 8080 will be occupied.
 
 Endpoints
 POST /auth: This endpoint generates a JWT token. You can test it using tools like cURL or Postman. Example:
