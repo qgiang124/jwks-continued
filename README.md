@@ -34,6 +34,6 @@ sqlite3: SQLite database driver
 
 ## Test suit result
 The 3 test cases ensure that the endpoints in the Express application behave as expected under different scenarios, including generating valid and expired JWT tokens, 
-and serving JWKS JSON for token verification. 
+and serving JWKS JSON for token verification. I have some trouble with the last test. When I directly access the http://localhost:8080/.well-known/jwks.json endpoint in my browser, it successfully generates the JWKS (JSON Web Key Set) containing RSA keys. However, when I'm testing it using Jest and supertest, the response body is empty. I'm working on resolving this problem.
 ![Screenshot 2024-03-24 at 11 33 32 PM](https://github.com/qgiang124/jwks-continued/assets/99046066/d2c48297-1df3-4f0d-b6a2-26203ecb25da)
 
