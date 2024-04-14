@@ -14,13 +14,36 @@ To run the tests, execute the following command:
 This command will run the test suite using Jest. The tests ensure that endpoints return the expected responses and that the application functions correctly. 
 #### Note: Don't run the test while server is still active because the port 8080 will be occupied.
 
-Endpoints
-POST /auth: This endpoint generates a JWT token. You can test it using tools like cURL or Postman. Example:
+## Endpoints
+1. POST /auth
+- Description: Authenticates a user and generates an authentication token.
+- Request Body:
+username: The username of the user to authenticate.
+- Response:
+  
+      200 OK: If authentication is successful.
+      Body: JSON object containing the authentication token.
 
-`curl -X POST http://localhost:8080/auth`
 
-GET /.well-known/jwks.json: This endpoint serves the JWKS JSON for token verification. Example:`
-curl http://localhost:8080/.well-known/jwks.json`
+      404 Not Found: If the user does not exist.
+      Body: JSON object with an error message.
+
+
+      500 Internal Server Error: If an unexpected error occurs during authentication.
+      Body: JSON object with an error message.
+
+2. POST /register
+- Description: Registers a new user.
+- Request Body:
+
+      username: The username of the new user.
+      email: The email address of the new user.
+- Response:
+  
+      201 Created: If registration is successful.
+      Body: JSON object containing the generated password for the user.
+      500 Internal Server Error: If registration fails.
+      Body: JSON object with an error message.
 
 Dependencies
 Express.js: Web framework for Node.js
@@ -30,10 +53,8 @@ sqlite3: SQLite database driver
 
 ## Result for test client (https://github.com/jh125486/CSCE3550/releases)
 
-![Screenshot 2024-03-24 at 11 34 30 PM](https://github.com/qgiang124/jwks-continued/assets/99046066/e1cd92fe-c6c9-4766-bc2d-4d37ac099819)
+![Screenshot 2024-04-13 at 9 56 08 PM](https://github.com/qgiang124/jwks-continued/assets/99046066/7eda28f6-44fb-41f1-a204-7d6744ef07cc)
+
 
 ## Test suit result
-The 3 test cases ensure that the endpoints in the Express application behave as expected under different scenarios, including generating valid and expired JWT tokens, 
-and serving JWKS JSON for token verification. I have some trouble with the last test. When I directly access the http://localhost:8080/.well-known/jwks.json endpoint in my browser, it successfully generates the JWKS (JSON Web Key Set) containing RSA keys. However, when I'm testing it using Jest and supertest, the response body is empty. I'm working on resolving this problem.
-![Screenshot 2024-03-24 at 11 33 32 PM](https://github.com/qgiang124/jwks-continued/assets/99046066/d2c48297-1df3-4f0d-b6a2-26203ecb25da)
-
+![Screenshot 2024-04-13 at 9 55 34 PM](https://github.com/qgiang124/jwks-continued/assets/99046066/03e4107a-aa54-4e95-8488-24bcc7b93b8b)
